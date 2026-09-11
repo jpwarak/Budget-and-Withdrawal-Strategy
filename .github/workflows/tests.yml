@@ -1,0 +1,33 @@
+name: Tests
+
+# Runs the Playwright regression suite (tests/) against withdrawal_strategy_JP.html
+# on every push and pull request, on a clean GitHub-hosted machine with real
+# network access -- so it fetches the real Chart.js from cdnjs the same way a
+# person's browser does, no local copy or stub needed.
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tests
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Install test dependencies (Playwright + a local Chart.js copy)
+        run: npm install
+
+      - name: Install Playwright's managed Chromium build
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the full test suite
+        run: node run-all.js

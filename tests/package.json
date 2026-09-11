@@ -1,0 +1,14 @@
+{
+  "name": "withdrawal-strategy-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright regression suite for withdrawal_strategy_JP.html",
+  "scripts": {
+    "test": "node run-all.js",
+    "install-browser": "npx playwright install chromium"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0",
+    "chart.js": "^4.4.0"
+  }
+}
